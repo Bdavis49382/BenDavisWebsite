@@ -1,0 +1,19 @@
+﻿<div class="col-4">
+	<h2 class="text-center @TextClass">@Name</h2>
+	<ul>
+		@foreach (string item in Content)
+		{
+			<li class="@TextClass">@item</li>
+		}
+	</ul>
+</div>
+
+@code {
+	[Parameter]
+	public List<String>? Content { get; set; }
+	[Parameter]
+	public string? Name { get; set; }
+	[Parameter]
+	public string? TextClass { get; set; }
+
+}

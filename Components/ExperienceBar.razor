@@ -1,0 +1,71 @@
+﻿<div class="half-page">
+	<div class="row h-100 @BackgroundClass bg-gradient p-5">
+		<div class="col-md-4">
+			<div class="container d-flex justify-content-center">
+				<div class="container w-auto h-auto">
+					<img src="https://placehold.co/250" />
+				</div>
+			</div>
+		</div>
+			<div class="col-md-8">
+				<div class="row">
+					<h1 class="@textClass text-center pb-4">@Experience.Name - @Experience.GetTypeString()</h1>
+				</div>
+				@if (descriptionIsMinimized)
+				{
+					<div class="row h-75">
+						<div class="d-flex col-9 @transitionStarted">
+							<ContentList Name="Technologies" Content=Experience.Technologies TextClass=@textClass/>
+							<ContentList Name="Skills" Content=Experience.Skills TextClass="@textClass"/>
+							<LinkList Name="Links" Content=Experience.Links TextClass="@textClass"/>
+						</div>
+						<div class="col-3 align-items-center d-flex">
+							<button onclick=@(() => toggleDescription()) class="btn @buttonClass">See Details</button>
+						</div>
+					</div>
+				}
+				else
+				{
+				<div class="row h-75">
+					<div class="col-9 @transitionStarted">
+						<p>@Experience.Description</p>
+					</div>
+					<div class="col-3 align-items-center d-flex">
+						<button onclick=@(() => toggleDescription()) class="btn @buttonClass">Hide Details</button>
+					</div>
+				</div>
+				}
+			</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string BackgroundClass { get; set; } = "bg-black";
+
+	[Parameter]
+	public Experience? Experience { get; set; }
+	string textClass { get; set; } = "text-white";
+	string buttonClass { get; set; } = "btn-dark";
+
+	string transitionStarted { get; set; } = "reveal";
+
+	bool descriptionIsMinimized { get; set; } = true;
+
+	public async void toggleDescription()
+	{
+		transitionStarted = "hide";
+		await Task.Delay(500);
+		descriptionIsMinimized = !descriptionIsMinimized;
+		transitionStarted = "reveal";
+		StateHasChanged();
+	}
+
+
+	protected override void OnInitialized()
+	{
+		 textClass = BackgroundClass == "bg-black" ? "text-white" : "text-black";
+		 buttonClass = BackgroundClass == "bg-black" ? "btn-light" : "btn-dark";
+	}
+
+}

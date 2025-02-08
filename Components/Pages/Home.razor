@@ -1,0 +1,48 @@
+﻿@page "/"
+@inject IExperienceService ExperienceService
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<HomeBar/>
+@if (isLoading)
+{
+	<p>Loading...</p>
+}
+else
+{
+	@for(int i=0;i<Experiences!.Count;i++)
+	{
+		@if(i % 2 == 0)
+		{
+			<ExperienceBar BackgroundClass="bg-white" Experience="@Experiences[i]"/>
+		}
+		else
+		{
+			<ExperienceBar BackgroundClass="bg-black" Experience="@Experiences[i]"/>
+		}
+
+	}
+}
+
+@code {
+	List<Experience>? Experiences {get; set;}
+	bool isLoading = true;
+
+	protected override async Task OnInitializedAsync()
+	{
+	}
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			await Task.Delay(1000);
+			Experiences = ExperienceService.GetExperienceList();
+			isLoading = false;
+			StateHasChanged();
+		}
+	}
+}
+
+

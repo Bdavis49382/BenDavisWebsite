@@ -1,0 +1,20 @@
+﻿<div class="col-4">
+	<h2 class="text-center @TextClass">@Name</h2>
+	<ul>
+		@foreach ((string,string) item in Content)
+		{
+			<li>
+				<a href="@item.Item2">@item.Item1</a>
+			</li>
+		}
+	</ul>
+</div>
+
+@code {
+	[Parameter]
+	public List<(string,string)>? Content { get; set; }
+	[Parameter]
+	public string? Name { get; set; }
+	[Parameter]
+	public string? TextClass { get; set; }
+}

@@ -1,0 +1,62 @@
+﻿@using BenDavisWebsite.Models
+@rendermode InteractiveServer
+
+<p>@Message</p>
+<EditForm Model=@NewProject OnSubmit=@FormSubmittedAsync FormName="EntryForm">
+	<div class="form-group">
+		<label for="Name">Name</label>
+		<InputText @bind-Value=NewProject!.Name class="form-control" id="Name" />
+	</div>
+	<div class="form-group">
+		<label for="Description">Description</label>
+		<InputText @bind-Value=NewProject!.Description class="form-control" id="Description" />
+	</div>
+	<div class="form-group">
+		<label>Technologies:</label>
+		<button type="button" @onclick="() => NewProject.Technologies.Add(string.Empty)">Add New</button>
+		@for (int i=0; i< NewProject.Technologies.Count(); i++)
+		{
+			int elementIndex = i;
+			<div>
+				<InputText @bind-Value=NewProject.Technologies[elementIndex] placeholder="Enter Technology"/>
+				<button type="button" @onclick="() => NewProject.Technologies.RemoveAt(elementIndex)">Remove</button>
+			</div>
+		}
+	</div>
+	<div class="form-group">
+		<label>Experience Type:</label>
+		<InputSelect @bind-Value="@NewProject.Type">
+			@foreach (var value in Enum.GetValues<ExperienceType>())
+			{
+				<option value="@value">@value</option>
+			}
+		</InputSelect>
+	</div>
+	<div class="form-group">
+		<label>Date Started: (Only Month Matters)</label>
+		<InputDate TValue="DateTime" @bind-Value="@NewProject.Started"/>
+	</div>
+	<div class="form-group">
+		<InputFile OnChange="UploadFiles"/>
+	</div>
+	<input type="submit" value="Submit" class="btn btn-primary" />
+</EditForm>
+
+@code {
+	[SupplyParameterFromForm]
+	Experience? NewProject { get; set; } = new();
+	string? Message;
+
+	async Task FormSubmittedAsync()
+	{
+		Message = "Submitted";
+		StateHasChanged();
+	}
+
+	async Task UploadFiles(InputFileChangeEventArgs e)
+	{
+		NewProject!.MediaLink = e.File.Name;
+		Message = "File Uploaded: " + NewProject!.MediaLink;
+	}
+
+}

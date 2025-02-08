@@ -1,0 +1,40 @@
+﻿@rendermode InteractiveServer
+
+<div class="text-white">@descriptor</div>
+
+
+@code {
+	string? descriptor;
+	string[] descriptors = new string[] { "Software Developer", "Fullstack Engineer", "Problem Solver", "Leader", "Husband", "Pickleballer", "BYU-Idaho Alum", "Musician" };
+	protected override void OnInitialized()
+	{
+		StartTimer();
+
+	}
+
+	public async void StartTimer()
+	{
+		while (true)
+		{
+			for (int descriptorIndex=0; descriptorIndex<descriptors.Length; descriptorIndex++)
+			{
+				for (int charIndex=1; charIndex<=descriptors[descriptorIndex].Length; charIndex++)
+				{
+					descriptor = descriptors[descriptorIndex][0..charIndex];
+					StateHasChanged();
+					await Task.Delay(100);
+				}
+
+				await Task.Delay(300);
+
+				for (int charIndex=descriptors[descriptorIndex].Length-1; charIndex>0; charIndex--)
+				{
+					descriptor = descriptors[descriptorIndex][0..charIndex];
+					StateHasChanged();
+					await Task.Delay(20);
+				}
+
+			}
+		}
+	}
+}
