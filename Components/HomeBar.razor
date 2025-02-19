@@ -9,13 +9,45 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<div class="container d-flex justify-content-center">
-				<h1 class="text-white">Search</h1>
+			<h2 class="text-white">Search Technologies</h2>
+			<div class="technology-area">
+				<div class="row pe-5 pt-1">
+					@foreach (string image in Images.Keys)
+					{
+						<LogoImage AddSearchItem=AddSearchItem Link=@image Name=@Images[image]/>
+					}
+				</div>
+			</div>
+			<h2 class="text-white mt-4">Search Skills</h2>
+			<div class="row">
+				@foreach (string skill in Skills)
+				{
+					<div class="col-md-3 col-sm-6">
+						<h4 class="text-white @(SearchItems.Contains(skill) ? "clicked" : "")" onclick="@(() => AddSearchItem.InvokeAsync(skill))">@skill</h4>
+					</div>
+				}
 			</div>
 		</div>
 	</div>
 </div>
 
 @code {
-
+	[Parameter]
+	public List<string> SearchItems { get; set; }
+	[Parameter]
+	public EventCallback<string> AddSearchItem { get; set; }
+	Dictionary<string,string> Images { get; set; } = new() { 
+		{"images/java-original-wordmark.svg","Java"},
+		{"images/javascript.svg","Javascript" },
+		{"images/nodejs-original.svg","Node.js" },
+		{"images/react-javascript-js-framework-facebook.svg", "React.js" },
+		{"images/python.svg", "Python" }
+	};
+	List<string> Skills { get; set; } = new()
+	{
+		"Teamwork",
+		"Leadership",
+		"Troubleshooting",
+		"Agile"
+	};
 }

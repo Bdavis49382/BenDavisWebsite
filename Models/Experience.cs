@@ -4,7 +4,7 @@
 	{
 		public List<string> Technologies = new();
 		public List<string> Skills = new();
-		public List<(string,string)> Links = new();
+		public List<string[]> Links = new();
 		public string? Description { get; set; }
 		public string? Name { get; set; }
 		public ExperienceType Type { get; set; }

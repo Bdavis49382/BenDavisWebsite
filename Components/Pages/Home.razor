@@ -4,22 +4,22 @@
 
 <PageTitle>Home</PageTitle>
 
-<HomeBar/>
+<HomeBar SearchItems=SearchItems AddSearchItem=AddSearchItem/>
 @if (isLoading)
 {
 	<p>Loading...</p>
 }
 else
 {
-	@for(int i=0;i<Experiences!.Count;i++)
+	@for(int i=0;i<VisibleExperiences!.Count;i++)
 	{
 		@if(i % 2 == 0)
 		{
-			<ExperienceBar BackgroundClass="bg-white" Experience="@Experiences[i]"/>
+			<ExperienceBar SearchItems=@SearchItems BackgroundClass="bg-white" Experience="@VisibleExperiences[i]"/>
 		}
 		else
 		{
-			<ExperienceBar BackgroundClass="bg-black" Experience="@Experiences[i]"/>
+			<ExperienceBar BackgroundClass="bg-black" Experience="@VisibleExperiences[i]"/>
 		}
 
 	}
@@ -27,21 +27,40 @@ else
 
 @code {
 	List<Experience>? Experiences {get; set;}
+	List<Experience>? VisibleExperiences { get; set; } = new();
+	List<string> SearchItems { get; set; } = new();
 	bool isLoading = true;
-
-	protected override async Task OnInitializedAsync()
-	{
-	}
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
 		if (firstRender)
 		{
 			await Task.Delay(1000);
-			Experiences = ExperienceService.GetExperienceList();
+			Experiences = await ExperienceService.GetExperienceList();
+			VisibleExperiences = Experiences;
 			isLoading = false;
 			StateHasChanged();
 		}
+	}
+
+	public void AddSearchItem(string item)
+	{
+		if (SearchItems.Contains(item))
+		{
+			SearchItems.Remove(item);
+		} else
+		{
+			SearchItems.Add(item);
+		}
+
+		if (SearchItems != null && SearchItems.Count > 0)
+		{
+			VisibleExperiences = ExperienceService.SortExperienceList(Experiences, SearchItems);
+		} else
+		{
+			VisibleExperiences = Experiences;
+		}
+		StateHasChanged();
 	}
 }
 

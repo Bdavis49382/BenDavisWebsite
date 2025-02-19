@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 
-builder.Services.AddScoped<IExperienceService, ExperienceService>();
+builder.Services.AddSingleton<IExperienceService, ExperienceService>();
 
 var app = builder.Build();
 

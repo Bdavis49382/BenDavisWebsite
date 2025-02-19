@@ -1,5 +1,6 @@
 ﻿@using BenDavisWebsite.Models
 @rendermode InteractiveServer
+@inject IExperienceService ExperienceService
 
 <p>@Message</p>
 <EditForm Model=@NewProject OnSubmit=@FormSubmittedAsync FormName="EntryForm">
@@ -24,6 +25,31 @@
 		}
 	</div>
 	<div class="form-group">
+		<label>Skills:</label>
+		<button type="button" @onclick="() => NewProject.Skills.Add(string.Empty)">Add New</button>
+		@for (int i=0; i< NewProject.Skills.Count(); i++)
+		{
+			int elementIndex = i;
+			<div>
+				<InputText @bind-Value=NewProject.Skills[elementIndex] placeholder="Enter Skill"/>
+				<button type="button" @onclick="() => NewProject.Skills.RemoveAt(elementIndex)">Remove</button>
+			</div>
+		}
+	</div>
+	<div class="form-group">
+		<label>Links:</label>
+		<button type="button" @onclick="() => NewProject.Links.Add(new string[2] {string.Empty,string.Empty})">Add New</button>
+		@for (int i=0; i< NewProject.Links.Count(); i++)
+		{
+			int elementIndex = i;
+			<div>
+				<InputText @bind-Value=NewProject.Links[elementIndex][0] placeholder="Enter Link Text"/>
+				<InputText @bind-Value=NewProject.Links[elementIndex][1] placeholder="Enter Link URL"/>
+				<button type="button" @onclick="() => NewProject.Links.RemoveAt(elementIndex)">Remove</button>
+			</div>
+		}
+	</div>
+	<div class="form-group">
 		<label>Experience Type:</label>
 		<InputSelect @bind-Value="@NewProject.Type">
 			@foreach (var value in Enum.GetValues<ExperienceType>())
@@ -37,6 +63,17 @@
 		<InputDate TValue="DateTime" @bind-Value="@NewProject.Started"/>
 	</div>
 	<div class="form-group">
+		<label>Date Finished: (Only Month Matters)</label>
+		<InputDate TValue="DateTime" @bind-Value="@NewProject.Finished"/>
+	</div>
+	<div class="form-group">
+		<label>Media Type:</label>
+		<InputSelect @bind-Value="@NewProject.Media">
+			@foreach (var value in Enum.GetValues<MediaType>())
+			{
+				<option value="@value">@value</option>
+			}
+		</InputSelect>
 		<InputFile OnChange="UploadFiles"/>
 	</div>
 	<input type="submit" value="Submit" class="btn btn-primary" />
@@ -49,7 +86,16 @@
 
 	async Task FormSubmittedAsync()
 	{
-		Message = "Submitted";
+		if (NewProject is not null)
+		{
+			Message = "Submitted";
+			await ExperienceService.AddExperience(NewProject);
+			NewProject = new();
+		}
+		else
+		{
+			Message = "No Project to Submit.";
+		}
 		StateHasChanged();
 	}
 

@@ -9,7 +9,7 @@
 		</div>
 			<div class="col-md-8">
 				<div class="row">
-					<h1 class="@textClass text-center pb-4">@Experience.Name - @Experience.GetTypeString()</h1>
+					<h2 class="@textClass text-center pb-4">@Experience.Name - @Experience.GetTypeString()</h2>
 				</div>
 				@if (descriptionIsMinimized)
 				{
@@ -28,7 +28,7 @@
 				{
 				<div class="row h-75">
 					<div class="col-9 @transitionStarted">
-						<p>@Experience.Description</p>
+						<p class="@textClass">@Experience.Description</p>
 					</div>
 					<div class="col-3 align-items-center d-flex">
 						<button onclick=@(() => toggleDescription()) class="btn @buttonClass">Hide Details</button>
@@ -43,6 +43,8 @@
 	[Parameter]
 	public string BackgroundClass { get; set; } = "bg-black";
 
+	[Parameter]
+	public List<string>? SearchItems { get; set; }
 	[Parameter]
 	public Experience? Experience { get; set; }
 	string textClass { get; set; } = "text-white";

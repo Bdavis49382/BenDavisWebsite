@@ -1,10 +1,10 @@
 ﻿<div class="col-4">
 	<h2 class="text-center @TextClass">@Name</h2>
 	<ul>
-		@foreach ((string,string) item in Content)
+		@foreach (string[] item in Content)
 		{
 			<li>
-				<a href="@item.Item2">@item.Item1</a>
+				<a href="@item[1]">@item[0]</a>
 			</li>
 		}
 	</ul>
@@ -12,7 +12,7 @@
 
 @code {
 	[Parameter]
-	public List<(string,string)>? Content { get; set; }
+	public List<string[]> Content { get; set; }
 	[Parameter]
 	public string? Name { get; set; }
 	[Parameter]

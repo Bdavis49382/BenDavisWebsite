@@ -1,5 +1,10 @@
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "EB Garamond", serif;
+    font-weight: bolder;
+}
+
+a {
+    text-decoration: none;
 }
 
 a, .btn-link {
@@ -18,6 +23,25 @@ a, .btn-link {
 
 .content {
     padding-top: 1.1rem;
+}
+
+h1 {
+    font-family: "Ramaraja", serif;
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+img {
+    max-width: 100%;
+}
+
+.technology-area {
+    max-height:30vh;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 h1:focus {
@@ -85,14 +109,9 @@ ul {
 .reveal {
     animation-name: reveal;
     animation-duration: .75s;
-
 }
 
-/*.experience-bar:nth-child(1) h1 {
-    color: white;
+.clicked {
+    border: 1px solid rgba(0, 148, 255,.2);
+    border-radius: 10px;
 }
-
-.experience-bar :nth-child(2) h1 {
-    color: black;
-}
-*/

@@ -1,0 +1,22 @@
+﻿
+<div class="col-md-3 col-sm-6">
+	<img onclick=@HandleClick src=@Link class="@Clicked p-2"/>
+</div>
+
+@code {
+	[Parameter]
+	public string? Link { get; set; }
+	[Parameter]
+	public string? Name { get; set; }
+	[Parameter]
+	public EventCallback<string> AddSearchItem { get; set; }
+
+	public string Clicked { get; set; } = "";
+	public void HandleClick()
+	{
+		Clicked = Clicked == "clicked" ? "" : "clicked";
+		
+		AddSearchItem.InvokeAsync(Name);
+	}
+
+}
