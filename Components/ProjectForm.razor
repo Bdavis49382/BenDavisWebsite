@@ -82,6 +82,8 @@
 @code {
 	[SupplyParameterFromForm]
 	Experience? NewProject { get; set; } = new();
+
+	private IBrowserFile? inputFile;
 	string? Message;
 
 	async Task FormSubmittedAsync()
@@ -89,6 +91,12 @@
 		if (NewProject is not null)
 		{
 			Message = "Submitted";
+			if (inputFile is not null)
+			{
+				using MemoryStream memoryStream = new MemoryStream();
+				await inputFile.OpenReadStream().CopyToAsync(memoryStream);
+				await ExperienceService.AddExperience(NewProject, memoryStream);
+			}
 			await ExperienceService.AddExperience(NewProject);
 			NewProject = new();
 		}
@@ -103,6 +111,7 @@
 	{
 		NewProject!.MediaLink = e.File.Name;
 		Message = "File Uploaded: " + NewProject!.MediaLink;
+		inputFile = e.File;
 	}
 
 }

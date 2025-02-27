@@ -11,7 +11,7 @@
 		<div class="col-md-6">
 			<h2 class="text-white">Search Technologies</h2>
 			<div class="technology-area">
-				<div class="row pe-5 pt-1">
+				<div class="row pe-5 pt-1 gap-1">
 					@foreach (string image in Images.Keys)
 					{
 						<LogoImage AddSearchItem=AddSearchItem Link=@image Name=@Images[image]/>
@@ -19,11 +19,11 @@
 				</div>
 			</div>
 			<h2 class="text-white mt-4">Search Skills</h2>
-			<div class="row">
+			<div class="row gap-3 p-1">
 				@foreach (string skill in Skills)
 				{
-					<div class="col-md-3 col-sm-6">
-						<h4 class="text-white @(SearchItems.Contains(skill) ? "clicked" : "")" onclick="@(() => AddSearchItem.InvokeAsync(skill))">@skill</h4>
+					<div class="col-auto @(SearchItems.Contains(skill) ? "clicked" : "") pointer bg-secondary rounded">
+						<h4 class="text-black" onclick="@(() => AddSearchItem.InvokeAsync(skill))">@skill</h4>
 					</div>
 				}
 			</div>

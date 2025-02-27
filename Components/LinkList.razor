@@ -1,13 +1,16 @@
 ﻿<div class="col-4">
 	<h2 class="text-center @TextClass">@Name</h2>
-	<ul>
-		@foreach (string[] item in Content)
-		{
-			<li>
-				<a href="@item[1]">@item[0]</a>
-			</li>
-		}
-	</ul>
+	@if(Content.Count > 0)
+	{
+		<ul>
+			@foreach (string[] item in Content)
+			{
+				<li>
+					<a href="@item[1]">@item[0]</a>
+				</li>
+			}
+		</ul>
+	}
 </div>
 
 @code {

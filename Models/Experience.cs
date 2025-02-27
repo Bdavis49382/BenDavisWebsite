@@ -1,17 +1,44 @@
-﻿namespace BenDavisWebsite.Models
+﻿using Google.Cloud.Firestore;
+
+namespace BenDavisWebsite.Models
 {
+	[FirestoreData]
 	public class Experience
 	{
-		public List<string> Technologies = new();
-		public List<string> Skills = new();
-		public List<string[]> Links = new();
+		public List<string> _technologies = new();
+		[FirestoreProperty]
+		public List<string> Technologies { 
+			get { return _technologies; }
+			set { _technologies = value; }
+		}
+		public List<string> _skills = new();
+		[FirestoreProperty]
+		public List<string> Skills
+		{
+			get { return _skills; }
+			set { _skills = value; }
+		}
+		public List<string[]> _links = new();
+		[FirestoreProperty]
+		public List<string[]> Links
+		{
+			get { return _links; }
+			set { _links = value; }
+		}
+		[FirestoreProperty]
 		public string? Description { get; set; }
+		[FirestoreProperty]
 		public string? Name { get; set; }
+		[FirestoreProperty]
 		public ExperienceType Type { get; set; }
+		[FirestoreProperty]
 		public string? MediaLink { get; set; }
+		[FirestoreProperty]
 		public MediaType Media { get; set; }
-		public DateTime Started { get; set; } = DateTime.Now;
-		public DateTime Finished { get; set; } = DateTime.Now;
+		[FirestoreProperty]
+		public DateTime Started { get; set; } = DateTime.UtcNow;
+		[FirestoreProperty]
+		public DateTime Finished { get; set; } = DateTime.UtcNow;
 		public string GetTypeString()
 		{
 			return Type switch

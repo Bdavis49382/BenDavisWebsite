@@ -1,5 +1,6 @@
 using BenDavisWebsite.Components;
 using BenDavisWebsite.Services;
+using BenDavisWebsite.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 
-builder.Services.AddSingleton<IExperienceService, ExperienceService>();
+builder.Services.AddScoped<IExperienceDB, ExperienceDB>();
+builder.Services.AddScoped<IExperienceService, ExperienceService>();
 
 var app = builder.Build();
 

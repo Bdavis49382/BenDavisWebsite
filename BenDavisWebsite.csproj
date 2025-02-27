@@ -16,4 +16,9 @@
     <None Remove="Components\Layout\NavMenu.razor.css" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
+    <PackageReference Include="Google.Cloud.Firestore" Version="3.9.0" />
+  </ItemGroup>
+
 </Project>

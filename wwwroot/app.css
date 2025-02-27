@@ -44,6 +44,10 @@ img {
     scrollbar-width: none;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 h1:focus {
     outline: none;
 }
@@ -112,6 +116,6 @@ ul {
 }
 
 .clicked {
-    border: 1px solid rgba(0, 148, 255,.2);
+    border: 3px solid rgba(0, 148, 255,.2);
     border-radius: 10px;
 }
