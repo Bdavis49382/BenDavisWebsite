@@ -94,10 +94,15 @@
 			if (inputFile is not null)
 			{
 				using MemoryStream memoryStream = new MemoryStream();
-				await inputFile.OpenReadStream().CopyToAsync(memoryStream);
+				// Define the maximum file size allowed (2 GB)
+				long maxFileSize = 2L * 1024L * 1024L * 1024L;
+				await inputFile.OpenReadStream(maxAllowedSize: maxFileSize).CopyToAsync(memoryStream);
 				await ExperienceService.AddExperience(NewProject, memoryStream);
 			}
-			await ExperienceService.AddExperience(NewProject);
+			else
+			{
+				await ExperienceService.AddExperience(NewProject);
+			}
 			NewProject = new();
 		}
 		else

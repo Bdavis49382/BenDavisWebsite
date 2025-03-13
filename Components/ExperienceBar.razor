@@ -9,7 +9,7 @@
 					}
 					else if (Experience.Media == MediaType.Video)
 					{
-						
+						<video class="video" src="@Experience.MediaLink" width="320" height="240" autoplay loop muted="muted" />
 					}
 					else
 					{
@@ -76,10 +76,10 @@
 	}
 
 
-	protected override void OnInitialized()
+	protected async override Task OnInitializedAsync()
 	{
-		 textClass = BackgroundClass == "bg-black" ? "text-white" : "text-black";
-		 buttonClass = BackgroundClass == "bg-black" ? "btn-light" : "btn-dark";
+		textClass = BackgroundClass == "bg-black" ? "text-white" : "text-black";
+		buttonClass = BackgroundClass == "bg-black" ? "btn-light" : "btn-dark";
 	}
 
 }
