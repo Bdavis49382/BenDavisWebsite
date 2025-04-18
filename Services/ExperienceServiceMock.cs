@@ -34,21 +34,21 @@ namespace BenDavisWebsite.Services
 
 		public Experience Clean(Experience experience)
 		{
-			foreach (string[] link in experience.Links)
+			foreach (Link link in experience.Links)
 			{
-				if (string.IsNullOrEmpty(link[0]))
+				if (string.IsNullOrEmpty(link.Text))
 				{
-					link[0] = "Link";
+					link.Text = "Link";
 				}
 
-				if (string.IsNullOrEmpty(link[1]))
+				if (string.IsNullOrEmpty(link.Url))
 				{
-					link[0] = "Empty Link";
+					link.Text = "Empty Link";
 				}
 
-				if (!link[1].Contains("https://"))
+				if (!link.Url.Contains("https://"))
 				{
-					link[1] = "https://" + link[1];
+					link.Url = "https://" + link.Url;
 				}
 			}
 			return experience;
@@ -68,6 +68,10 @@ namespace BenDavisWebsite.Services
 				}
 			}
 			return outList;
+		}
+		public async Task<List<string>> GetSkills()
+		{
+			return new List<string>();
 		}
 
 	}

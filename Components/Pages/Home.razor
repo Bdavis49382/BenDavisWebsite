@@ -12,6 +12,9 @@
 }
 else
 {
+	<p style="text-align: end;padding-right:1em;">
+		@(VisibleExperiences.Count() == Experiences.Count() ? "All Items" : VisibleExperiences.Count() + " Item(s).")
+	</p>
 	@for(int i=0;i<VisibleExperiences!.Count;i++)
 	{
 		@if(i % 2 == 0)

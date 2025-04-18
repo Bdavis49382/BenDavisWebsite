@@ -1,48 +1,46 @@
 ﻿<div class="half-page">
-	<div class="row h-100 @BackgroundClass bg-gradient p-5">
-		<div class="col-md-4">
-			<div class="container d-flex justify-content-center">
-				<div class="container w-auto h-auto">
-					@if (Experience.Media == MediaType.NotProvided || string.IsNullOrEmpty(Experience.MediaLink))
-					{
-						<img src="https://placehold.co/250" />
-					}
-					else if (Experience.Media == MediaType.Video)
-					{
-						<video class="video" src="@Experience.MediaLink" width="320" height="240" autoplay loop muted="muted" />
-					}
-					else
-					{
-						<img src=@Experience.MediaLink />
-					}
-				</div>
+	<div class="row h-100 @BackgroundClass bg-gradient p-2">
+		<div class="col-lg-4 justify-content-center d-flex container">
+			<div class="container w-auto h-auto p-0">
+				@if (Experience.Media == MediaType.NotProvided || string.IsNullOrEmpty(Experience.MediaLink))
+				{
+					<img src="https://placehold.co/320x240" />
+				}
+				else if (Experience.Media == MediaType.Video)
+				{
+					<video class="video" src="@Experience.MediaLink" width="320" height="240" autoplay loop muted="muted" />
+				}
+				else
+				{
+					<img src=@Experience.MediaLink width="320" height="240"/>
+				}
 			</div>
 		</div>
-			<div class="col-md-8">
+			<div class="col-lg-8">
 				<div class="row">
 					<h2 class="@textClass text-center pb-4">@Experience.Name - @Experience.GetTypeString()</h2>
 				</div>
 				@if (descriptionIsMinimized)
 				{
-					<div class="row h-75">
-						<div class="d-flex col-9 @transitionStarted">
+					<div class="row h-lg-75">
+						<div class="d-flex justify-content-center col-lg-9 flex-wrap gap-4 gap-lg-1 p-0 @transitionStarted">
 							<ContentList Name="Technologies" Content=Experience.Technologies TextClass=@textClass/>
 							<ContentList Name="Skills" Content=Experience.Skills TextClass="@textClass"/>
 							<LinkList Name="Links" Content=Experience.Links TextClass="@textClass"/>
 						</div>
-						<div class="col-3 align-items-center d-flex">
+						<div class="col-lg-3 align-items-center d-flex justify-content-center">
 							<button onclick=@(() => toggleDescription()) class="btn @buttonClass">See Details</button>
 						</div>
 					</div>
 				}
 				else
 				{
-				<div class="row h-75">
-					<div class="col-9 @transitionStarted">
+				<div class="row h-lg-75">
+					<div class="col-lg-9 @transitionStarted">
 						<p class="@textClass">@Experience.Started.ToString("MMM yyyy")-@Experience.Finished.ToString("MMM yyyy")</p>
 						<p class="@textClass">@Experience.Description</p>
 					</div>
-					<div class="col-3 align-items-center d-flex">
+					<div class="col-lg-3 align-items-center d-flex">
 						<button onclick=@(() => toggleDescription()) class="btn @buttonClass">Hide Details</button>
 					</div>
 				</div>

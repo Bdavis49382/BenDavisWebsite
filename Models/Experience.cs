@@ -18,9 +18,9 @@ namespace BenDavisWebsite.Models
 			get { return _skills; }
 			set { _skills = value; }
 		}
-		public List<string[]> _links = new();
+		public List<Link> _links = new();
 		[FirestoreProperty]
-		public List<string[]> Links
+		public List<Link> Links
 		{
 			get { return _links; }
 			set { _links = value; }
@@ -61,5 +61,14 @@ namespace BenDavisWebsite.Models
 	public enum MediaType
 	{
 		 NotProvided, Image, Video	
+	}
+	[FirestoreData]
+	public class Link
+	{
+		[FirestoreProperty]
+		public string? Text { get; set; } = String.Empty;
+
+		[FirestoreProperty]
+		public string? Url { get; set; } = String.Empty;
 	}
 }

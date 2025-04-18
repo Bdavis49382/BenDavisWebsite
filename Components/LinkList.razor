@@ -3,10 +3,10 @@
 	@if(Content.Count > 0)
 	{
 		<ul>
-			@foreach (string[] item in Content)
+			@foreach (Link item in Content)
 			{
 				<li>
-					<a href="@item[1]">@item[0]</a>
+					<a href="@item.Url">@item.Text</a>
 				</li>
 			}
 		</ul>
@@ -15,7 +15,7 @@
 
 @code {
 	[Parameter]
-	public List<string[]> Content { get; set; }
+	public List<Link> Content { get; set; }
 	[Parameter]
 	public string? Name { get; set; }
 	[Parameter]

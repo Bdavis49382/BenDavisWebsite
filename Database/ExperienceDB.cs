@@ -36,7 +36,7 @@ namespace BenDavisWebsite.Database
         public async Task<List<Experience>> GetExperiencesAsync()
         {
             List<Experience> outList = new();
-            var response = await _db.Collection("Experiences").GetSnapshotAsync();
+            var response = await _db.Collection("Experiences").OrderByDescending("Started").GetSnapshotAsync();
             foreach (DocumentSnapshot snapshot in response)
             {
                 outList.Add(new Experience
@@ -44,7 +44,7 @@ namespace BenDavisWebsite.Database
                     Name = snapshot.GetValue<string>("Name"),
                     Technologies = snapshot.GetValue<List<string>>("Technologies"),
                     Skills = snapshot.GetValue<List<string>>("Skills"),
-                    Links = snapshot.GetValue<List<string[]>>("Links"),
+                    Links = snapshot.GetValue<List<Link>>("Links"),
                     Description = snapshot.GetValue<string>("Description"),
                     Type = snapshot.GetValue<ExperienceType>("Type"),
                     MediaLink = snapshot.GetValue<string>("MediaLink"),
@@ -52,6 +52,23 @@ namespace BenDavisWebsite.Database
                     Started = snapshot.GetValue<DateTime>("Started"),
                     Finished = snapshot.GetValue<DateTime>("Finished")
                 });
+            }
+            return outList;
+        }
+
+        public async Task<List<string>> GetSkills()
+        {
+            List<string> outList = new();
+            var response = await _db.Collection("Experiences").GetSnapshotAsync();
+            foreach (DocumentSnapshot snapshot in response)
+            {
+                foreach (var skill in snapshot.GetValue<List<string>>("Skills"))
+                {
+                    if (!outList.Contains(skill))
+                    {
+                        outList.Add(skill);
+                    }
+                }
             }
             return outList;
         }

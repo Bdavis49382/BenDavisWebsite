@@ -38,10 +38,12 @@ img {
     max-width: 100%;
 }
 
-.technology-area {
-    max-height:30vh;
+.searchitem-area {
+    padding-left:1rem;
+    max-height:20vh;
     overflow-y: scroll;
     scrollbar-width: none;
+    box-shadow: rgba(50,50,50,.9) 5px 5px 15px;
 }
 
 .pointer {
@@ -83,7 +85,7 @@ h1:focus {
 }
 
 .half-page {
-    height: 50vh;
+    height: auto;
 }
 
 li {
@@ -118,4 +120,49 @@ ul {
 .clicked {
     border: 3px solid rgba(0, 148, 255,.2);
     border-radius: 10px;
+}
+
+.animated-hover:hover {
+    animation-name: twist;
+    animation-duration: .5s;
+    transition-duration: .25s;
+}
+
+@keyframes twist {
+    0% {
+        rotate: 0deg;
+    }
+
+    50% {
+        rotate: 5deg;
+    }
+
+    100% {
+        rotate: 0deg;
+    }
+}
+
+.clicked-skill {
+    background-color: rgba(128,128,255,1);
+}
+
+.skill {
+    background-color: rgba(128, 128, 128,.5);
+}
+
+h4 {
+    margin-bottom: 0px;
+}
+
+@media only screen and (max-width: 990px) {
+    .full-page {
+        height: auto;
+    }
+
+    .half-page {
+        height: auto;
+    }
+    .searchitem-area {
+        max-height: 30vh;
+    }
 }

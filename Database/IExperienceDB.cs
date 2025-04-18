@@ -6,5 +6,6 @@ namespace BenDavisWebsite.Database
 
         public Task AddExperience(Experience e, MemoryStream? imageStream);
         public Task<List<Experience>> GetExperiencesAsync();
+        public Task<List<string>> GetSkills();
     }
 }

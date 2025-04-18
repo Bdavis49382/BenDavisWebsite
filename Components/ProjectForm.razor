@@ -38,13 +38,13 @@
 	</div>
 	<div class="form-group">
 		<label>Links:</label>
-		<button type="button" @onclick="() => NewProject.Links.Add(new string[2] {string.Empty,string.Empty})">Add New</button>
+		<button type="button" @onclick="() => NewProject.Links.Add(new())">Add New</button>
 		@for (int i=0; i< NewProject.Links.Count(); i++)
 		{
 			int elementIndex = i;
 			<div>
-				<InputText @bind-Value=NewProject.Links[elementIndex][0] placeholder="Enter Link Text"/>
-				<InputText @bind-Value=NewProject.Links[elementIndex][1] placeholder="Enter Link URL"/>
+				<InputText @bind-Value=NewProject.Links[elementIndex].Text placeholder="Enter Link Text"/>
+				<InputText @bind-Value=NewProject.Links[elementIndex].Url placeholder="Enter Link URL"/>
 				<button type="button" @onclick="() => NewProject.Links.RemoveAt(elementIndex)">Remove</button>
 			</div>
 		}
