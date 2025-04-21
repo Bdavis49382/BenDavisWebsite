@@ -10,7 +10,7 @@
 			</div>
 		</div>
 		<div class="col-md-6">
-			<h2 class="text-white">Search Technologies</h2>
+			<h2 class="text-white">Select Technologies</h2>
 			<div class="searchitem-area">
 				<div class="row pt-1 gap-1 justify-content-center">
 					@foreach (string image in Images.Keys)
@@ -19,7 +19,7 @@
 					}
 				</div>
 			</div>
-			<h2 class="text-white mt-4">Search Skills</h2>
+			<h2 class="text-white mt-4">Select Skills</h2>
 			<div class="searchitem-area">
 				<div class="row gap-3 p-1">
 					@foreach (string skill in Skills)
@@ -51,7 +51,10 @@
 		{"images/tailwind-css.svg", "Tailwind"},
 		{"images/postgresql-plain-wordmark.svg","PostgreSQL"},
 		{"images/django-original.svg", "Django"},
-
+		{"images/mongodb.svg", "MongoDB"},
+		{"images/firebase.svg", "Firebase"},
+		{"images/kotlin.svg", "Kotlin"},
+		{"images/c++.svg", "C++"}
 	};
 	List<string> Skills { get; set; } = new();
 
