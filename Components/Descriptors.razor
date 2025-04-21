@@ -20,20 +20,26 @@
 			{
 				for (int charIndex=1; charIndex<=descriptors[descriptorIndex].Length; charIndex++)
 				{
-					descriptor = descriptors[descriptorIndex][0..charIndex];
+					descriptor = descriptors[descriptorIndex][0..charIndex] + "_";
 					StateHasChanged();
-					await Task.Delay(100);
+					await Task.Delay(200);
 				}
 
+				await Task.Delay(100);
+				descriptor = descriptor[0..(descriptor.Length - 1)];
+				StateHasChanged();
 				await Task.Delay(300);
+				descriptor = descriptor + "_";
+				StateHasChanged();
+				await Task.Delay(200);
 
-				for (int charIndex=descriptors[descriptorIndex].Length-1; charIndex>0; charIndex--)
+				for (int charIndex=descriptors[descriptorIndex].Length-1; charIndex>=0; charIndex--)
 				{
-					descriptor = descriptors[descriptorIndex][0..charIndex];
+					descriptor = descriptors[descriptorIndex][0..charIndex] + "_";
 					StateHasChanged();
 					await Task.Delay(20);
 				}
-
+				await Task.Delay(300);
 			}
 		}
 	}
